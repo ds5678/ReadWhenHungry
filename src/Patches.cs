@@ -1,11 +1,10 @@
-﻿using Harmony;
+﻿using HarmonyLib;
 
 namespace ReadWhenHungry
 {
     class Patches
     {
-        [HarmonyPatch(typeof(Panel_Inventory_Examine))]
-        [HarmonyPatch("MaybeAbortReadingWithHUDMessage")]
+        [HarmonyPatch(typeof(Panel_Inventory_Examine), "MaybeAbortReadingWithHUDMessage")]
         [HarmonyPriority(Priority.Last)]
         class ReadWhenHungry
         {
@@ -23,7 +22,7 @@ namespace ReadWhenHungry
 
             private static bool ShouldPreventReading()
             {
-                var settings = Settings.options;
+                var settings = ReadWhenHungrySettings.options;
                 if (GameManager.GetWeatherComponent().IsTooDarkForAction(ActionsToBlock.Reading))
                 {
                     HUDMessage.AddMessage(Localization.Get("GAMEPLAY_TooDarkToRead"), false);

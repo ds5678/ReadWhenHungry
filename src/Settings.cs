@@ -4,6 +4,8 @@ namespace ReadWhenHungry
 {
     internal class ReadWhenHungrySettings : JsonModSettings
     {
+        internal static ReadWhenHungrySettings options = new ReadWhenHungrySettings();
+
         [Section("Basics")]
         [Name("Allow reading when hungry")]
         [Description("Allow reading when starving hungry (0 calories stored).")]
@@ -58,14 +60,5 @@ namespace ReadWhenHungry
 
         [Name("Allow reading with a sprained wrist")]
         public bool allowReadingWithSprainedWrist = true;
-    }
-    internal static class Settings
-    {
-        internal static ReadWhenHungrySettings options;
-        internal static void OnLoad()
-        {
-            options = new ReadWhenHungrySettings();
-            options.AddToModSettings("Read When Hungry", MenuType.Both);
-        }
     }
 }
